@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>detached host</title>
+  <style>
+    p {
+      font: 15px sans-serif;
+      color: #666;
+      font-style: italic;
+      line-height: 1.4
+    }
+
+    hr {
+      border: none;
+      border-bottom: solid 1px #CCC;
+    }
+  </style>
+</head>
+<body>
+<div id="sandbox"></div>
+
+<hr/>
+
+<p>When the a shadow-root is created on a host that is detached from the DOM, styles fail to apply. Styles only apply if the shadow-root is created when the host is in the DOM.</p>
+
+<script>
+  var html = '<style>h1{color:red;}</style><h1>I should be red</h1>';
+
+  (function createdWhenDetached() {
+    var host = document.createElement('div');
+    host.createShadowRoot();
+    host.shadowRoot.innerHTML = html;
+    sandbox.appendChild(host);
+  })();
+
+  (function createdWhenAttached() {
+    var host = document.createElement('div');
+    sandbox.appendChild(host);
+    host.createShadowRoot();
+    host.shadowRoot.innerHTML = html;
+  })();
+</script>
+</body>
+</html>
