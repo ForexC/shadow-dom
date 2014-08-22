@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Accessibility</title>
+  <style>
+    p {
+      font: 15px sans-serif;
+      color: #666;
+      font-style: italic;
+      line-height: 1.4
+    }
+
+    hr {
+      border: none;
+      border-bottom: solid 1px #CCC;
+    }
+
+    :focus {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div id="sandbox">
+  <button>One</button>
+  <button>Two</button>
+  <span id="host"></span>
+</div>
+
+<hr/>
+
+<p>The third button above is shadow-dom content, but should remain keyboard accessible.</p>
+
+<script>
+  host.createShadowRoot().innerHTML = '<style>:focus { background: red; }</style><button>Three</button>';
+</script>
+</body>
+</html>
