@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>detached host</title>
+  <style>
+    p {
+      font: 15px sans-serif;
+      color: #666;
+      font-style: italic;
+      line-height: 1.4;
+      margin: 0 0 0.5em;
+    }
+
+    hr {
+      border: none;
+      border-bottom: solid 1px #CCC;
+      margin: 1em 0;
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="sandbox">
+  <div id="div"></div>
+  <button id="remove">Remove</button>
+  <button id="append">Append</button>
+</div>
+
+<hr/>
+
+<p>Click the 'remove' button to remove the shadow-host from the dom. Then click the 'append' button to add it again. Observe when a shadow-host is removed from the DOM and then re-inserted the stylesheet inside the shadow-root fails to apply.</p>
+
+<script>
+  var html = '<style>h1{color:red;}</style><h1>Add and remove me from the DOM</h1>';
+  var div = document.getElementById('div');
+
+  div.createShadowRoot();
+  div.shadowRoot.innerHTML = html;
+
+  append.style.display = 'none';
+
+  remove.onclick = function() {
+    remove.style.display = 'none';
+    append.style.display = '';
+    div.remove();
+  };
+
+  append.onclick = function() {
+    append.style.display = 'none';
+    remove.style.display = '';
+    sandbox.insertBefore(div, remove);
+  };
+
+</script>
+</body>
+</html>
