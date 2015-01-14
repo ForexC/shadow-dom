@@ -1,6 +1,6 @@
 # Multiple Shadow Roots
 
-## [Live Demo](http://wilsonpage.github.io/shadow-dom/multiple-shadow-roots)
+### [Live Demo](http://wilsonpage.github.io/shadow-dom/multiple-shadow-roots)
 
 ## Issues:
 
