@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>shadow-dom: video</title>
+  <style>
+
+    * { margin: 0; padding: 0; }
+
+    p {
+      font: 15px sans-serif;
+      color: #666;
+      font-style: italic;
+      line-height: 1.4
+    }
+
+    hr {
+      border: none;
+      border-bottom: solid 1px #CCC;
+    }
+  </style>
+</head>
+<body>
+<div id="sandbox">
+  <div id="overlay">
+    <h1>Title Text (light)</h1>
+    <button>Button Text (light)</button>
+  </div>
+
+  <div id="overlayAlert">Alert message (light)</div>
+</div>
+
+<script>
+
+
+var overlayTemplate = `
+  <style>
+    .inner {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0,0,0,0.2);
+    }
+
+    .pane {
+      width: 80%;
+      max-width: 400px;
+      background: white;
+    }
+  </style>
+  <div class="inner">
+    <div class="pane">
+      <content></content>
+    </div>
+  </div>
+`;
+
+var overlayAlertTemplate = `
+  <style>
+    .pane { color: red; }
+  </style>
+
+  <shadow>
+    <h1><content></content></h1>
+    <button>OK (shadow)</button>
+  </shadow>
+`;
+
+// The standard overlay just has one simple shadow-root
+overlay.createShadowRoot().innerHTML = overlayTemplate;
+
+// The overlay-alert wants to extend the standard overlay.
+// First we create a shadow-root using the standard-overlay's
+// template. Then we create a second shadow-root which uses
+// its own template. This template contains a special <shadow>
+// element which is an insertion point for the first shadow-
+// root's content. The content of the <shadow> element will
+// take the place of the <content> tags in the first shadow-root.
+overlayAlert.createShadowRoot().innerHTML = overlayTemplate;
+overlayAlert.createShadowRoot().innerHTML = overlayAlertTemplate;
+
+</script>
+</body>
+</html>
